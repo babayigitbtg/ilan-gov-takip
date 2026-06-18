@@ -1,4 +1,4 @@
-name: ilan.gov Test
+name: ilan.gov Takip
 
 on:
   workflow_dispatch:
@@ -6,6 +6,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
 
     steps:
       - name: Kodlari cek
@@ -21,3 +24,19 @@ jobs:
 
       - name: Programi calistir
         run: python app.py
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+
+      - name: seen.json kaydet
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          git pull origin main --rebase
+
+          git add seen.json
+
+          git diff --staged --quiet || git commit -m "seen.json guncelle"
+
+          git push
