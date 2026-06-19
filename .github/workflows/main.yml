@@ -3,6 +3,9 @@ name: ilan.gov Takip
 on:
   workflow_dispatch:
 
+  push:
+
+
   schedule:
     - cron: "*/15 * * * *"
 
