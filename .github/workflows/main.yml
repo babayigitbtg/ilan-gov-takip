@@ -3,11 +3,8 @@ name: ilan.gov Takip
 on:
   workflow_dispatch:
 
-  repository_dispatch:
-    types: [cronjob]
-
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "0 */2 * * *"
 
 jobs:
   test:
