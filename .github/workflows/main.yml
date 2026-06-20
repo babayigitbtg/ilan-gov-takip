@@ -3,8 +3,8 @@ name: ilan.gov Takip
 on:
   workflow_dispatch:
 
-  push:
-
+  repository_dispatch:
+    types: [cronjob]
 
   schedule:
     - cron: "*/15 * * * *"
@@ -43,6 +43,4 @@ jobs:
 
           git diff --staged --quiet || git commit -m "seen.json guncelle"
 
-          git pull --rebase origin main || true
-
-          git push || true
+          git push
