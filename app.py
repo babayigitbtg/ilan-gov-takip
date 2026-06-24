@@ -5,15 +5,22 @@ import requests
 BOT_TOKEN = os.environ["BOT_TOKEN"]
 CHAT_ID = os.environ["CHAT_ID"]
 
+import os
+import json
+import requests
+
+BOT_TOKEN = os.environ["BOT_TOKEN"]
+CHAT_ID = os.environ["CHAT_ID"]
+
 def telegram(msg):
-requests.get(
-f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
-params={
-"chat_id": CHAT_ID,
-"text": msg
-},
-timeout=30
-)
+    requests.get(
+        f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
+        params={
+            "chat_id": CHAT_ID,
+            "text": msg
+        },
+        timeout=30
+    )
 
 url = "https://www.ilan.gov.tr/api/api/services/app/Ad/AdsByFilter"
 
