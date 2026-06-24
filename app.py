@@ -15,7 +15,6 @@ params={
 timeout=30
 )
 
-
 url = "https://www.ilan.gov.tr/api/api/services/app/Ad/AdsByFilter"
 
 payload = {
@@ -74,22 +73,17 @@ eski = set(seen.get("ilanlar", []))
 yeni = []
 
 for ilan in ilanlar:
-
-```
 if ilan["id"] not in eski:
-
-    yeni.append(ilan)
-```
+yeni.append(ilan)
 
 print("Toplam ilan:", len(ilanlar))
 print("Seen sayisi:", len(eski))
 print("Yeni ilan sayisi:", len(yeni))
 
 if eski:
-
-```
 for ilan in yeni:
 
+```
     telegram(
         f"🔔 Yeni İhale\n\n"
         f"{ilan['baslik']}\n\n"
