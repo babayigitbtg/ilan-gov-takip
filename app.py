@@ -32,8 +32,15 @@ payload = {
 }
 
 headers = {
-    "User-Agent": "Mozilla/5.0",
-    "Content-Type": "application/json"
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/140.0.0.0 Safari/537.36"
+    ),
+    "Accept": "application/json, text/plain, */*",
+    "Content-Type": "application/json",
+    "Referer": "https://www.ilan.gov.tr/",
+    "Origin": "https://www.ilan.gov.tr"
 }
 
 r = requests.post(
@@ -44,7 +51,21 @@ r = requests.post(
     timeout=60
 )
 
-data = r.json()
+print("ilan.gov.tr HTTP STATUS:", r.status_code)
+print("ilan.gov.tr CONTENT TYPE:", r.headers.get("content-type"))
+print("ilan.gov.tr RESPONSE:", r.text[:1000])
+
+if r.status_code != 200:
+    raise Exception(
+        f"ilan.gov.tr HTTP hatası: {r.status_code}"
+    )
+
+try:
+    data = r.json()
+except ValueError:
+    raise Exception(
+        "ilan.gov.tr JSON yerine farklı bir cevap döndürdü."
+    )
 
 ilanlar = []
 
