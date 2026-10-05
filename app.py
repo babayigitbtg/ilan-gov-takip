@@ -325,4 +325,3 @@ with open(
 
 
 print("Tamamlandı")
-```
