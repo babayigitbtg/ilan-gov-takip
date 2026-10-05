@@ -35,10 +35,8 @@ url = "https://www.ilan.gov.tr/api/api/services/app/Ad/AdsByFilter"
 
 payload = {
     "keys": {
-        "aci": [62],
         "txv": [9],
-        "order": ["desc"],
-        "field": ["publish_time"]
+        "aci": [62]
     },
     "sorting": "publish_time desc",
     "skipCount": 0,
@@ -57,7 +55,10 @@ headers = {
     "Content-Type": "application/json",
     "Origin": "https://www.ilan.gov.tr",
     "Referer": "https://www.ilan.gov.tr/",
-    "Connection": "keep-alive"
+    "X-Requested-With": "XMLHttpRequest",
+    "X-Request-Origin": "IGT-UI",
+    "Cache-Control": "no-cache",
+    "Pragma": "no-cache"
 }
 
 
@@ -125,11 +126,12 @@ print("======================================")
 
 try:
     r = session.post(
-        url,
-        json=payload,
-        verify=False,
-        timeout=60
-    )
+    url,
+    json=payload,
+    headers=headers,
+    verify=False,
+    timeout=60
+)
 
 except Exception as e:
     raise Exception(
